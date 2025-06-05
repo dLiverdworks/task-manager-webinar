@@ -12,7 +12,8 @@ class TeamController extends Controller
      */
     public function index()
     {
-        //
+        $data = Team::all();
+        return view('team.index', compact('data'));
     }
 
     /**
@@ -28,7 +29,15 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+
+        $request->validate([
+            'nama_team' => ['required', 'string', 'max:60']
+        ]);
+
+        Team::create($input);
+
+        return redirect()->route('team.index')->with('success', 'Team berhasil ditambahkan');
     }
 
     /**
