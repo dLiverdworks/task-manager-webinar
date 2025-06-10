@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="p-6">
-                    <form method="POST" action="#">
+                    <form method="POST" action="{{route('simpan.task', $data->id)}}">
                         @csrf
                         <div>
                             <x-input-label for="judul_task" :value="__('Task')" />
@@ -37,14 +37,25 @@
                             <x-input-error :messages="$errors->get('judul_task')" class="mt-2" />
                         </div>
                         <div class="mt-4">
-                            <x-input-label for="telpon" :value="__('Telpon')" />
-                            <x-text-input id="telpon" class="block mt-1 w-full" type="text" name="telpon" 
-                            :value="old('telpon')" required autofocus />
+                            <x-input-label for="deskripsi" :value="__('Deskripsi')" />
+                            <textarea name="deskripsi" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"></textarea>
                             <x-input-error :messages="$errors->get('telpon')" class="mt-2" />
+                        </div>
+                        <div>
+                            <x-input-label for="start_date" :value="__('Start Date')" />
+                            <x-text-input id="start_date" class="block mt-1 w-full" type="date" name="start_date" 
+                            :value="old('start_date')" required autofocus />
+                            <x-input-error :messages="$errors->get('start_date')" class="mt-2" />
+                        </div>
+                        <div>
+                            <x-input-label for="end_date" :value="__('End Date')" />
+                            <x-text-input id="end_date" class="block mt-1 w-full" type="date" name="end_date" 
+                            :value="old('end_date')" required autofocus />
+                            <x-input-error :messages="$errors->get('end_date')" class="mt-2" />
                         </div>
                         <div class="flex items-center justify-end mt-4">
                             <x-primary-button class="ms-3">
-                                {{ __('Tambah Member') }}
+                                {{ __('Tambah Task') }}
                             </x-primary-button>
                         </div>
                     </form>

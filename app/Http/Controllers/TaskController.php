@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -13,6 +14,21 @@ class TaskController extends Controller
     public function index()
     {
         //
+    }
+    
+    public function simpan(Request $request, $id): RedirectResponse
+    {
+        $input = $request->all();
+        $request->validate([
+            'judul_task'=>['required', 'string', 'min:3', 'max:50'],
+            'deskripsi'=>['required'],
+            'start_date'=>['required'],
+            'end_date'=>['required'],
+        ]);
+
+        $input['team_id'] = $id;
+        Task::create($input);
+        return back();
     }
 
     /**
