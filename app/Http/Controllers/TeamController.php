@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Team;
+use App\Models\Member;
 use Illuminate\Http\Request;
 
 class TeamController extends Controller
@@ -43,9 +44,11 @@ class TeamController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Team $team)
+    public function show($id)
     {
-        //
+        $data = Team::findOrFail($id);
+        $member = Member::where('team_id', $id)->get()->all();
+        return view('team.detail', compact('data', 'member'));
     }
 
     /**
